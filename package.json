@@ -1,10 +1,13 @@
 {
-  "name": "radiks",
+  "name": "@vital-edu/radiks",
   "version": "0.2.1",
   "description": "Manage models with encryption and decentralized storage",
   "main": "lib/index.js",
   "author": "Hank Stoever",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
