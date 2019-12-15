@@ -12,12 +12,18 @@ interface GroupInvitationAttrs extends Attrs {
 
 export default class GroupInvitation extends Model {
   static className = 'GroupInvitation';
-  userPublicKey: string;
 
   static schema: Schema = {
     userGroupId: String,
     signingKeyPrivateKey: String,
-    signingKeyId: String,
+    signingKeyId: {
+      type: String,
+      decrypted: true,
+    },
+    userPublicKey: {
+      type: String,
+      decrypted: true,
+    },
   }
 
   static defaults = {
@@ -32,8 +38,8 @@ export default class GroupInvitation extends Model {
       userGroupId: userGroup._id,
       signingKeyPrivateKey: userGroup.privateKey,
       signingKeyId: userGroup.attrs.signingKeyId,
+      userPublicKey: publicKey,
     });
-    invitation.userPublicKey = publicKey;
     await invitation.save();
     return invitation;
   }
@@ -56,7 +62,7 @@ export default class GroupInvitation extends Model {
   }
 
   async encryptionPublicKey() {
-    return this.userPublicKey;
+    return this.attrs.userPublicKey;
   }
 
   encryptionPrivateKey() {

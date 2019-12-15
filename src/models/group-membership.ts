@@ -19,13 +19,19 @@ interface UserGroupKeys {
 export default class GroupMembership extends Model {
   static className = 'GroupMembership';
   static schema = {
-    userGroupId: String,
+    userGroupId: {
+      type: String,
+      decrypted: true,
+    },
     username: {
       type: String,
       decrypted: true,
     },
+    signingKeyId: {
+      type: String,
+      decrypted: true,
+    },
     signingKeyPrivateKey: String,
-    signingKeyId: String,
   }
 
   static async fetchUserGroups(): Promise<UserGroupKeys> {
